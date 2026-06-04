@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Change to master if your default GitHub branch is master
 
 media_folder: "assets/images"
 public_folder: "/images"
@@ -10,22 +10,40 @@ collections:
     label: "Website Content"
     files:
       - file: "content/stories.json"
-        name: "stories"
-        label: "Current Feed Stories"
+        name: "series_manager"
+        label: "Series & Feed Manager"
         fields:
-          - name: "entries"
-            label: "Story Entries"
+          - name: "series_list"
+            label: "Fictional Universes / Series"
             widget: "list"
-            summary: "{{fields.title}}"
+            allow_add: true
+            summary: "{{fields.series_title}} ({{fields.status}})"
             fields:
-              - name: "title"
-                label: "Title / Day Number (e.g., Day 44)"
+              - name: "series_title"
+                label: "Series Title (e.g., The Legends Volume 1)"
                 widget: "string"
-              - name: "date"
-                label: "Publish Date (e.g., June 4, 2026)"
-                widget: "datetime"
-                date_format: "MMMM DD, YYYY"
-                time_format: false
-              - name: "body"
-                label: "Story Text Block (100-150 words)"
-                widget: "text"
+              - name: "status"
+                label: "Series Status"
+                widget: "select"
+                options: ["Active", "Archived"]
+                default: "Active"
+              - name: "description"
+                label: "Short Archive Description"
+                widget: "string"
+                hint: "A brief summary shown to readers browsing the archives tab."
+              - name: "entries"
+                label: "Story Entries"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - name: "title"
+                    label: "Title / Day Number (e.g., Day 44)"
+                    widget: "string"
+                  - name: "date"
+                    label: "Publish Date"
+                    widget: "datetime"
+                    date_format: "MMMM D, YYYY"
+                    time_format: false
+                  - name: "body"
+                    label: "Story Text Block (100-150 words)"
+                    widget: "text"
