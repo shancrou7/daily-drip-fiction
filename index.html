@@ -3,160 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asher William Crouse | Daily Drip Fiction Stream</title>
-    
+    <title>Asher William Crouse | Official Author Platform</title>
     <style>
+        /* --- BRAND DESIGN SYSTEM (Pure Black, Deep Blue, Crimson Red) --- */
         :root {
-            --bg-main: #0A0A0F;
-            --bg-card: #12121A;
-            --border-slate: #1E293B;
-            --accent-blue: #2563EB;
-            --accent-blue-hover: #3B82F6;
-            --text-bright: #F8FAFC;
-            --text-silver: #CBD5E1;
-            --text-dark-gray: #64748B;
-            
-            --badge-active: #065F46;
-            --badge-active-txt: #34D399;
-            --badge-closed: #334155;
-            --badge-closed-txt: #94A3B8;
+            --bg-pure-black: #000000;  /* Pure void black backdrop */
+            --bg-surface: #0a0a0f;     /* Slightly lighter tone for containers */
+            --bg-card: #121218;        /* Slate black cards */
+            --primary-blue: #3b82f6;   /* Accessible, electric Royal Blue */
+            --accent-red: #ef4444;     /* Vivid Crimson Red for critical metrics */
+            --text-pure-white: #ffffff;/* Maximum contrast typography */
+            --text-silver: #cbd5e1;    /* High-readability secondary prose */
+            --text-dark-gray: #64748b;  /* Metadata and limits */
+            --border-glow: #1e293b;    /* Clean dividing guidelines */
+            --font-size-base: 1rem;
         }
 
+        /* --- ACCESSIBILITY & GLOBAL RESETS --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-silver);
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            line-height: 1.6;
-            padding: 0 16px;
+            background-color: var(--bg-pure-black);
+            color: var(--text-pure-white);
+            line-height: 1.7;
+            padding-bottom: 80px;
+            overflow-x: hidden;
         }
 
-        /* Structural Layout Container */
-        .platform-wrapper {
-            max-width: 680px;
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        a:hover {
+            color: #93c5fd;
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+        }
+
+        .container {
+            max-width: 760px;
             margin: 0 auto;
-            padding: 40px 0;
+            padding: 0 20px;
         }
 
-        /* Navigation & Identity Brand Header */
-        header {
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-slate);
-            padding-bottom: 20px;
+        /* --- CX TOOLBAR (USER UTILITIES) --- */
+        .cx-toolbar {
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-glow);
+            padding: 8px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
         }
 
-        .brand-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-bright);
-            letter-spacing: -0.5px;
-            margin-bottom: 6px;
+        .cx-toolbar-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .brand-tagline {
-            font-size: 14px;
+        .reading-engine-status {
+            font-size: 0.75rem;
             color: var(--text-dark-gray);
-            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
+        .text-resizer {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .text-resizer span {
+            font-size: 0.75rem;
+            color: var(--text-dark-gray);
+            font-weight: bold;
+        }
+
+        .size-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            color: var(--text-silver);
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .size-btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--text-pure-white);
+        }
+
+        /* --- HERO AREA (FRONT & CENTER AUTHOR IDENTITY) --- */
+        .author-hero {
+            text-align: center;
+            padding: 60px 0 40px 0;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 40px;
+        }
+
+        .author-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--text-pure-white);
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .author-hero h1 span {
+            color: var(--primary-blue);
+            display: block;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        .author-hero p {
+            color: var(--text-silver);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 15px auto 0 auto;
+        }
+
+        /* --- USER-FRIENDLY MULTI-PAGE NAVIGATION --- */
         nav {
             display: flex;
-            gap: 16px;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
         }
 
-        nav button {
-            background: none;
-            border: none;
-            color: var(--text-dark-gray);
-            font-size: 14px;
+        .nav-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            color: var(--text-silver);
+            padding: 12px 20px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            padding: 6px 0;
-            transition: color 0.2s ease;
-            position: relative;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+            text-align: center;
+            max-width: 180px;
         }
 
-        nav button:hover, nav button.active-tab {
-            color: var(--text-bright);
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--text-dark-gray);
         }
 
-        nav button.active-tab::after {
-            content: '';
-            position: absolute;
-            bottom: -21px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: var(--accent-blue);
+        .nav-btn.active {
+            color: var(--text-pure-white);
+            border-color: var(--primary-blue);
+            background-color: rgba(59, 130, 246, 0.08);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
         }
 
-        /* Tab Layout Views Configuration */
+        /* --- DYNAMIC PAGES SECTORS --- */
         .page {
             display: none;
         }
 
         .page.active-page {
             display: block;
-            animation: fadeIn 0.4s ease-out;
+            animation: contentSlideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
+        @keyframes contentSlideIn {
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Feed Elements Styles */
-        .feed-header-info, .archive-cluster h3 {
+        /* --- MONETIZATION TIERS --- */
+        .donation-banner {
+            background: linear-gradient(145deg, #09090e 0%, #020204 100%);
+            border: 1px solid var(--border-glow);
+            border-left: 4px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 630px) {
+            .donation-banner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .donation-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+
+        .donation-info p {
+            font-size: 0.9rem;
+            color: var(--text-silver);
+        }
+
+        .donation-actions {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+
+        @media (min-width: 630px) {
+            .donation-actions {
+                width: auto;
+            }
+        }
+
+        .action-btn {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .btn-red {
+            background-color: var(--accent-red);
+            color: var(--text-pure-white);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+            transition: background 0.2s;
+        }
+
+        .btn-red:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-glow);
+            color: var(--text-pure-white);
+            transition: background 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-silver);
+        }
+
+        /* --- NARRATIVE FEED CARDS (PAGE 1) --- */
+        .feed-header-info {
             margin-bottom: 24px;
         }
 
-        .feed-header-info h2, .archive-cluster h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-bright);
+        .feed-header-info h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
         }
 
         .feed-header-info p {
-            font-size: 14px;
-            color: var(--text-dark-gray);
+            color: var(--text-silver);
+            font-size: 0.95rem;
         }
 
-        /* The Core Fiction Drip-Card Component */
         .drip-card {
             background-color: var(--bg-card);
-            border: 1px solid var(--border-slate);
-            border-radius: 8px;
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
             padding: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .drip-card::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 25px;
+            bottom: 25px;
+            width: 4px;
+            background-color: var(--primary-blue);
+            border-radius: 0 4px 4px 0;
         }
 
         .drip-topline {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-dark-gray);
+            margin-bottom: 14px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--text-dark-gray);
-            margin-bottom: 16px;
-            border-bottom: 1px dashed var(--border-slate);
-            padding-bottom: 8px;
         }
 
         .drip-text-content {
-            font-size: 16px;
-            color: var(--text-silver);
-            white-space: pre-wrap; /* Keeps linebreaks working exactly as typed into CMS */
+            color: var(--text-pure-white);
+            font-size: calc(var(--font-size-base) * 1.05);
+            letter-spacing: 0.3px;
+            white-space: pre-wrap;
         }
 
-        /* Archives Matrix / Catalog Layout */
+        /* --- SERIES DIRECTORY ARCHIVE (PAGE 2) --- */
         .archive-cluster {
             margin-bottom: 40px;
+        }
+
+        .archive-cluster h3 {
+            font-size: 1.25rem;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .catalog-layout {
@@ -165,173 +339,232 @@
             gap: 16px;
         }
 
+        @media (min-width: 580px) {
+            .catalog-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         .catalog-card {
             background-color: var(--bg-card);
-            border: 1px solid var(--border-slate);
+            border: 1px solid var(--border-glow);
             border-radius: 8px;
             padding: 20px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .catalog-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
         }
 
         .catalog-card h4 {
-            font-size: 16px;
-            color: var(--text-bright);
+            font-size: 1.1rem;
             margin-bottom: 6px;
         }
 
         .catalog-card p {
-            font-size: 14px;
-            color: var(--text-dark-gray);
-            margin-bottom: 14px;
+            font-size: 0.85rem;
+            color: var(--text-silver);
+            margin-bottom: 15px;
         }
 
         .status-badge {
             display: inline-block;
-            font-size: 11px;
+            font-size: 0.7rem;
             font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .badge-active { background-color: var(--badge-active); color: var(--badge-active-txt); }
-        .badge-closed { background-color: var(--badge-closed); color: var(--badge-closed-txt); }
+        .badge-active { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+        .badge-closed { background-color: rgba(255, 255, 255, 0.05); color: var(--text-dark-gray); }
 
-        /* Monetization Modules & Support Zone */
-        .monetization-zone {
-            background: linear-gradient(135deg, #11111C 0%, #090910 100%);
-            border: 1px solid var(--border-slate);
-            border-radius: 8px;
-            padding: 28px;
-            margin-top: 40px;
+        /* --- BOOKSTORE & EXPLICIT FEATURE (PAGE 3) --- */
+        .bible-epic-feature {
+            background: linear-gradient(135deg, #040814 0%, #000000 100%);
+            border: 1px dashed var(--primary-blue);
+            border-radius: 12px;
+            padding: 30px;
             text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.1);
         }
 
-        .monetization-zone h3 {
-            font-size: 18px;
-            color: var(--text-bright);
+        .bible-epic-feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .bible-epic-feature p {
+            font-size: 1.05rem;
+            color: var(--text-silver);
+            max-width: 580px;
+            margin: 0 auto 24px auto;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .book-shell-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 16px;
+            margin-bottom: 45px;
+        }
+
+        .book-shell {
+            background-color: var(--bg-card);
+            border: 2px dashed var(--border-glow);
+            border-radius: 8px;
+            aspect-ratio: 2/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            text-align: center;
+            color: var(--text-dark-gray);
+            font-size: 0.8rem;
+        }
+
+        /* --- CONTACT WRAPPER --- */
+        .contact-wrapper {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        .contact-wrapper h3 {
+            font-size: 1.3rem;
             margin-bottom: 8px;
         }
 
-        .monetization-zone p {
-            font-size: 14px;
-            color: var(--text-dark-gray);
+        .contact-wrapper p {
+            color: var(--text-silver);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .form-row {
             margin-bottom: 20px;
         }
 
-        .donation-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        @media(min-width: 480px) {
-            .donation-actions { flex-direction: row; justify-content: center; }
-        }
-
-        .stripe-btn {
-            display: inline-block;
-            background-color: var(--accent-blue);
-            color: var(--text-bright);
-            font-size: 14px;
+        .form-row label {
+            display: block;
+            font-size: 0.85rem;
             font-weight: 600;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            transition: background-color 0.2s ease;
-        }
-
-        .stripe-btn:hover { background-color: var(--accent-blue-hover); }
-        .stripe-btn.secondary-tier {
-            background-color: transparent;
-            border: 1px solid var(--border-slate);
+            margin-bottom: 6px;
             color: var(--text-silver);
         }
-        .stripe-btn.secondary-tier:hover { background-color: rgba(255,255,255,0.03); }
 
-        /* Asynchronous Contact Form System */
-        .contact-form-block {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-slate);
-            border-radius: 8px;
-            padding: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark-gray);
-            margin-bottom: 6px;
-        }
-
-        .form-group input, .form-group textarea {
+        .form-row input, .form-row textarea {
             width: 100%;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border-slate);
+            background-color: var(--bg-pure-black);
+            border: 1px solid var(--border-glow);
             border-radius: 6px;
-            color: var(--text-bright);
             padding: 12px;
-            font-family: inherit;
-            font-size: 14px;
+            color: var(--text-pure-white);
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-row input:focus, .form-row textarea:focus {
             outline: none;
-            border-color: var(--accent-blue);
+            border-color: var(--primary-blue);
         }
 
-        .submit-btn {
-            width: 100%;
-            background-color: var(--accent-blue);
-            color: var(--text-bright);
-            border: none;
-            padding: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .submit-btn:hover { background-color: var(--accent-blue-hover); }
-
-        footer {
-            margin-top: 60px;
+        /* Form State Elements */
+        #form-success-msg {
+            display: none;
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--primary-blue);
+            color: var(--text-pure-white);
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
-            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* --- SYSTEM FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border-glow);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.85rem;
             color: var(--text-dark-gray);
-            border-top: 1px solid var(--border-slate);
-            padding-top: 20px;
+            margin-top: 60px;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+        }
+
+        .footer-socials a {
+            font-weight: 600;
+            font-size: 0.9rem;
         }
     </style>
-
+    <!-- Netlify Identity Widget Hook -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
-    <div class="platform-wrapper">
+    <!-- USER ACCESSIBILITY & CX TOOLBAR -->
+    <div class="cx-toolbar">
+        <div class="container cx-toolbar-flex">
+            <div class="reading-engine-status">Platform Mode: Optimized Reading</div>
+            <div class="text-resizer">
+                <span>TEXT SIZE:</span>
+                <button class="size-btn" onclick="adjustTextSize('small')">A-</button>
+                <button class="size-btn" onclick="adjustTextSize('normal')">Norm</button>
+                <button class="size-btn" onclick="adjustTextSize('large')">A+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         
-        <header>
-            <h1 class="brand-title">Asher William Crouse</h1>
-            <div class="brand-tagline">Micro-Fiction Serialization & Live Creative Index</div>
-            <nav id="platform-navigation-tabs">
-                <button class="nav-trigger active-tab" data-target="view-current">Current Feed</button>
-                <button class="nav-trigger" data-target="view-archives">All Series</button>
-                <button class="nav-trigger" data-target="view-about">Connect</button>
+        <!-- AUTHOR IDENTITY HERO CONTAINER -->
+        <header class="author-hero">
+            <h1>Asher William Crouse<span>Author & Storyteller</span></h1>
+            <p>Step inside immersive, serialized micro-fiction universes designed to deliver maximum high-momentum pacing every single day.</p>
+            
+            <nav>
+                <button class="nav-btn active" id="btn-current" onclick="switchView('current')">Current Feed</button>
+                <button class="nav-btn" id="btn-archives" onclick="switchView('archives')">All Series</button>
+                <button class="nav-btn" id="btn-bookstore" onclick="switchView('bookstore')">Library & Contact</button>
             </nav>
         </header>
 
+        <!-- SECURE SYSTEM TRANSACTION MODULE -->
+        <div class="donation-banner">
+            <div class="donation-info">
+                <h3>Support Asher's Writing Mission</h3>
+                <p>Fuel daily storytelling. Partner monthly or drop a one-time tip to keep the narrative engine alive.</p>
+            </div>
+            <div class="donation-actions">
+                <a href="https://buy.stripe.com/9B65kF94A9zJeVT9e0dMI04" target="_blank" class="action-btn btn-red">Become a Partner</a>
+                <a href="https://buy.stripe.com/8x26oJ6Ws6nx9Bz89WdMI03" target="_blank" class="action-btn btn-outline">One-Time Tip</a>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- VIEW BLOCK 1: CURRENT LIVE STREAM              -->
+        <!-- ============================================== -->
         <main id="view-current" class="page active-page">
             <div class="feed-header-info" id="active-series-header">
                 <h2>Active Series: Loading...</h2>
                 <p>New entries appear below instantly every afternoon.</p>
             </div>
 
+            <!-- This container will dynamically render published entries -->
             <div id="story-feed-container">
                 <p style="color: var(--text-dark-gray); font-style: italic; text-align: center; margin: 40px 0;">
                     Loading current narrative feed stream...
@@ -339,74 +572,153 @@
             </div>
         </main>
 
+        <!-- ============================================== -->
+        <!-- VIEW BLOCK 2: HISTORIC AND PLANNED ARCHIVES    -->
+        <!-- ============================================== -->
         <main id="view-archives" class="page">
             <div class="archive-cluster">
                 <h3>Ongoing & Active Arcs</h3>
                 <div class="catalog-layout" id="active-catalog-container">
-                    </div>
+                    <!-- Dynamic active series render here -->
+                </div>
             </div>
-
             <div class="archive-cluster">
                 <h3>Completed Selections</h3>
                 <div class="catalog-layout" id="archived-catalog-container">
-                    </div>
+                    <!-- Dynamic archived series render here -->
+                </div>
             </div>
         </main>
 
-        <main id="view-about" class="page">
-            <div class="feed-header-info">
-                <h2>Platform Framework & Outreach</h2>
-                <p>Direct synchronization with corporate, reader, and managerial lines.</p>
+        <!-- ============================================== -->
+        <!-- VIEW BLOCK 3: FOUNDATIONAL TRUTH & CONTACT     -->
+        <!-- ============================================== -->
+        <main id="view-bookstore" class="page">
+            
+            <!-- EXPLICIT UNFAILABLE TRUTH COMPONENT -->
+            <div class="bible-epic-feature">
+                <h3>The Holy Bible</h3>
+                <p>"The Holy Bible is totally the ultimate source of unfailing truth and the greatest book ever written."</p>
+                <a href="https://www.biblegateway.com/" target="_blank" class="action-btn btn-outline" style="display: inline-block; width: auto;">Read Free Online</a>
             </div>
 
-            <div class="contact-form-block">
-                <form name="platform-contact" method="POST" data-netlify="true">
+            <div class="archive-cluster">
+                <h3>Published Custom Works</h3>
+                <p style="color: var(--text-silver); font-size: 0.9rem; margin-bottom: 20px;">Long-form text adaptations and physical print runs are coming down the line. Keep an eye on this space!</p>
+                
+                <div class="book-shell-grid">
+                    <div class="book-shell">
+                        <strong style="color:var(--text-pure-white)">Volume I</strong>
+                        <span style="margin-top: 6px; font-size: 0.75rem;">In Progress</span>
+                    </div>
+                    <div class="book-shell">
+                        <strong style="color:var(--text-pure-white)">Volume II</strong>
+                        <span style="margin-top: 6px; font-size: 0.75rem;">In Progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AUTHOR WEBFORM INFRASTRUCTURE -->
+            <div class="contact-wrapper">
+                <h3>Contact Reader Management</h3>
+                <p>Have publishing propositions, business metrics inquiries, or questions about Asher's platform? Submit your details below.</p>
+                
+                <!-- Success Notification Panel -->
+                <div id="form-success-msg">
+                    Thank you! Your submission was transmitted securely. Management will review your message shortly.
+                </div>
+
+                <!-- Live AJAX Form System -->
+                <form id="netlify-author-form" method="POST" data-netlify="true" name="platform-contact">
                     <input type="hidden" name="form-name" value="platform-contact" />
                     
-                    <div class="form-group">
-                        <label for="visitor-name">Identity / Organization</label>
-                        <input type="text" id="visitor-name" name="name" placeholder="Your name or agency name" required />
+                    <div class="form-row">
+                        <label for="form-name-field">Your Name</label>
+                        <input type="text" id="form-name-field" name="visitor-name" required placeholder="Full Name">
                     </div>
-                    <div class="form-group">
-                        <label for="visitor-email">Communications Email</label>
-                        <input type="email" id="visitor-email" name="email" placeholder="you@example.com" required />
+                    <div class="form-row">
+                        <label for="form-email-field">Email Address</label>
+                        <input type="email" id="form-email-field" name="visitor-email" required placeholder="name@domain.com">
                     </div>
-                    <div class="form-group">
-                        <label for="visitor-message">Message Parameters</label>
-                        <textarea id="visitor-message" name="message" rows="5" placeholder="Inquiries, offers, or direct interface feedback..." required></textarea>
+                    <div class="form-row">
+                        <label for="form-msg-field">Message Box</label>
+                        <textarea id="form-msg-field" name="visitor-message" rows="5" required placeholder="Write your letter here..."></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Transmit Secure Signal</button>
+                    <button type="submit" class="action-btn btn-red" style="width: auto; padding: 12px 35px;">Submit Secure Form</button>
                 </form>
             </div>
         </main>
 
-        <section class="monetization-zone">
-            <h3>Support the Expansion</h3>
-            <p>Back the storytelling process cleanly to secure structural continuity.</p>
-            <div class="donation-actions">
-                <a href="#" class="stripe-btn" target="_blank">Become a Monthly Partner ($5/mo)</a>
-                <a href="#" class="stripe-btn secondary-tier" target="_blank">Send Reader Support Tip</a>
-            </div>
-        </section>
-
+        <!-- DYNAMIC SITUATIONAL PERSISTENT FOOTER -->
         <footer>
-            <p>&copy; 2026 Asher William Crouse. All Rights Reserved. Sovereign Content Distribution Framework.</p>
+            <div class="footer-socials">
+                <a href="#" target="_blank">X / Twitter</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">TikTok</a>
+                <a href="#" target="_blank">Threads</a>
+            </div>
+            <p>&copy; 2026 Asher William Crouse Media. Powered via Netlify Engine Pipeline.</p>
         </footer>
-
     </div>
 
+    <!-- HIGH-USER-FRIENDLINESS CONTROL ACTIONS -->
     <script>
-        /* --- APPLICATION CONTROLLER: VIEW SWAPPING LOGIC --- */
-        document.querySelectorAll('.nav-trigger').forEach(trigger => {
-            trigger.addEventListener('click', function() {
-                // Update navigation visual tabs indicators
-                document.querySelectorAll('.nav-trigger').forEach(btn => btn.classList.remove('active-tab'));
-                this.classList.add('active-tab');
+        /* --- ACCESSIBILITY TEXT-RESIZER CONTROLLER --- */
+        function adjustTextSize(targetSize) {
+            const bodyStyle = document.documentElement.style;
+            if (targetSize === 'small') {
+                bodyStyle.setProperty('--font-size-base', '0.9rem');
+            } else if (targetSize === 'normal') {
+                bodyStyle.setProperty('--font-size-base', '1rem');
+            } else if (targetSize === 'large') {
+                bodyStyle.setProperty('--font-size-base', '1.15rem');
+            }
+        }
 
-                // Toggle visibility states across individual blocks
-                const viewId = this.getAttribute('data-target');
-                document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
-                document.getElementById(viewId).classList.add('active-page');
+        /* --- SPA INSTANT VIEW CONTROLLER --- */
+        function switchView(targetViewId) {
+            const allViews = document.querySelectorAll('.page');
+            allViews.forEach(view => view.classList.remove('active-page'));
+            
+            const allNavButtons = document.querySelectorAll('.nav-btn');
+            allNavButtons.forEach(btn => btn.classList.remove('active'));
+            
+            const targetedNode = document.getElementById('view-' + targetViewId);
+            if (targetedNode) {
+                targetedNode.classList.add('active-page');
+            }
+            
+            const activelyClickedBtn = document.getElementById('btn-' + targetViewId);
+            if (activelyClickedBtn) {
+                activelyClickedBtn.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* --- NETLIFY AJAX FOR SPA FORMS --- */
+        document.getElementById("netlify-author-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const runningForm = e.target;
+            const collectedData = new FormData(runningForm);
+            
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(collectedData).toString()
+            })
+            .then(response => {
+                if (response.ok) {
+                    runningForm.reset();
+                    runningForm.style.display = "none";
+                    document.getElementById("form-success-msg").style.display = "block";
+                } else {
+                    alert("Submission anomaly detected. Please recheck system networks.");
+                }
+            })
+            .catch(error => {
+                alert("Connection failed. Details: " + error);
             });
         });
 
@@ -433,7 +745,6 @@
             const archivedCatalog = document.getElementById("archived-catalog-container");
 
             try {
-                // Fetch the central unified data stream updated via Decap CMS
                 const response = await fetch('/content/stories.json');
                 if (!response.ok) throw new Error("Database file uninitialized or missing.");
                 
@@ -447,7 +758,7 @@
                     return;
                 }
 
-                // 1. ROUTE TO HOMEPAGE LIVE FEED (Query out the series marked "Active")
+                // 1. ROUTE TO HOMEPAGE LIVE FEED
                 const activeSeries = seriesList.find(s => s.status === "Active");
                 
                 if (activeSeries) {
@@ -459,7 +770,6 @@
                     if (entries.length === 0) {
                         feedContainer.innerHTML = '<p style="color: var(--text-dark-gray); text-align: center;">Series initialized. Awaiting your first daily entry block!</p>';
                     } else {
-                        // Reverse arrays layout logic to drop newest published day over older layers
                         const newestFirst = [...entries].reverse();
                         feedContainer.innerHTML = newestFirst.map(story => `
                             <div class="drip-card">
@@ -476,7 +786,7 @@
                     feedContainer.innerHTML = '<p style="color: var(--text-dark-gray); text-align: center;">The author is currently organizing seasonal structures. Check the catalog tab to read historical content arcs!</p>';
                 }
 
-                // 2. ROUTE AND MAP OUT INDIVIDUAL ARCHIVE CATALOGS (Page 2)
+                // 2. ROUTE AND MAP OUT INDIVIDUAL ARCHIVE CATALOGS
                 let activeCardsHtml = "";
                 let archivedCardsHtml = "";
 
