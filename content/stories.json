@@ -23,6 +23,18 @@
         }
       ],
       "description": "The Legends Volume 1"
+    },
+    {
+      "status": "Archived",
+      "series_title": "Archive Test",
+      "description": "Archived Test Description",
+      "entries": [
+        {
+          "title": "Day 1 Test",
+          "date": "June 4, 2026",
+          "body": "Test Text Box"
+        }
+      ]
     }
   ]
 }
