@@ -733,7 +733,7 @@
             });
         }
 
-        /* --- DYNAMIC MULTI-SERIES DATA ROUTER ENGINE --- */
+        /* --- DYNAMIC MULTI-SERIES DATA ROUTER ENGINE (WITH SCHEDULED DATE RELEASES) --- */
         document.addEventListener("DOMContentLoaded", () => {
             loadPlatformData();
         });
@@ -750,6 +750,7 @@
                 
                 const data = await response.json();
                 const seriesList = data.series_list || [];
+                const now = new Date(); // Captures current clock parameters for smart-release filtering
 
                 if (seriesList.length === 0) {
                     if (feedContainer) feedContainer.innerHTML = '<p style="color: var(--text-dark-gray); text-align: center;">No narrative series built yet.</p>';
@@ -767,10 +768,18 @@
                     }
                     
                     const entries = activeSeries.entries || [];
-                    if (entries.length === 0) {
-                        feedContainer.innerHTML = '<p style="color: var(--text-dark-gray); text-align: center;">Series initialized. Awaiting your first daily entry block!</p>';
+                    
+                    // FILTER OUT STRATEGIC SPOILERS: Drop entries set to future release parameters
+                    const visibleEntries = entries.filter(story => {
+                        if (!story.date) return true; // Standard safe structural fallback
+                        const releaseDate = new Date(story.date);
+                        return releaseDate <= now;
+                    });
+
+                    if (visibleEntries.length === 0) {
+                        feedContainer.innerHTML = '<p style="color: var(--text-dark-gray); text-align: center;">Series initialized. Next entry is scheduled to drop soon!</p>';
                     } else {
-                        const newestFirst = [...entries].reverse();
+                        const newestFirst = [...visibleEntries].reverse();
                         feedContainer.innerHTML = newestFirst.map(story => `
                             <div class="drip-card">
                                 <div class="drip-topline">
@@ -786,18 +795,25 @@
                     feedContainer.innerHTML = '<p style="color: var(--text-dark-gray); text-align: center;">The author is currently organizing seasonal structures. Check the catalog tab to read historical content arcs!</p>';
                 }
 
-                // 2. ROUTE AND MAP OUT INDIVIDUAL ARCHIVE CATALOGS
+                // 2. ROUTE AND MAP OUT INDIVIDUAL ARCHIVE CATALOGS (Page 2)
                 let activeCardsHtml = "";
                 let archivedCardsHtml = "";
 
                 seriesList.forEach(series => {
-                    const totalEntries = series.entries ? series.entries.length : 0;
+                    const entries = series.entries || [];
+                    
+                    // Maintain pristine analytical clarity: Count only visible live documents for non-authenticated readers
+                    const visibleCount = entries.filter(story => {
+                        if (!story.date) return true;
+                        return new Date(story.date) <= now;
+                    }).length;
+
                     const cardTemplate = `
                         <div class="catalog-card">
                             <h4>${series.series_title}</h4>
                             <p>${series.description || 'No summary parameters provided yet.'}</p>
                             <span class="status-badge ${series.status === 'Active' ? 'badge-active' : 'badge-closed'}">
-                                ${series.status === 'Active' ? 'Active Stream' : 'Completed Collection'} (${totalEntries} Days)
+                                ${series.status === 'Active' ? 'Active Stream' : 'Completed Collection'} (${visibleCount} Days)
                             </span>
                         </div>
                     `;
