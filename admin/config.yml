@@ -1,25 +1,29 @@
 backend:
   name: git-gateway
-  branch: main # Change to master if your default GitHub branch is master
+  branch: main
 
 media_folder: "assets/images"
 public_folder: "/images"
 
 collections:
-  - name: "feed"
-    label: "Current Feed"
-    folder: "content/blog" # This is the folder path in GitHub where your story markdown files live
-    create: true
-    slug: "day-{{fields.title}}"
-    editor:
-      preview: false # Disables the default preview pane to keep the editor clean and fast
-    fields:
-      - name: "title"
-        label: "Title / Day Number (e.g., 44)"
-        widget: "string"
-      - name: "date"
-        label: "Publish Date"
-        widget: "datetime"
-      - name: "body"
-        label: "Story Text Block (100-150 words)"
-        widget: "markdown"
+  - name: "content"
+    label: "Website Content"
+    files:
+      - file: "content/stories.json"
+        name: "stories"
+        label: "Current Feed Stories"
+        fields:
+          - name: "entries"
+            label: "Story Entries"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - name: "title"
+                label: "Title / Day Number (e.g., Day 44)"
+                widget: "string"
+              - name: "date"
+                label: "Publish Date (e.g., June 4, 2026)"
+                widget: "string"
+              - name: "body"
+                label: "Story Text Block (100-150 words)"
+                widget: "text"
