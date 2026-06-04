@@ -23,7 +23,9 @@ collections:
                 widget: "string"
               - name: "date"
                 label: "Publish Date (e.g., June 4, 2026)"
-                widget: "string"
+                widget: "datetime"
+                date_format: "MMMM DD, YYYY"
+                time_format: false
               - name: "body"
                 label: "Story Text Block (100-150 words)"
                 widget: "text"
